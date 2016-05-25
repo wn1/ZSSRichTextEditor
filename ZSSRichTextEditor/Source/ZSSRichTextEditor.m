@@ -12,7 +12,7 @@
 #import "ZSSBarButtonItem.h"
 #import "HRColorUtil.h"
 #import "ZSSTextView.h"
-
+#import "ZSSRichTextEditorResource.h"
 
 @interface UIWebView (HackishAccessoryHiding)
 @property (nonatomic, assign) BOOL hidesInputAccessoryView;
@@ -170,7 +170,7 @@ static Class hackishFixClass = Nil;
         UIToolbar *keyboardToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(-7, -1, 44, 44)];
         [toolbarCropper addSubview:keyboardToolbar];
         
-        self.keyboardItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSkeyboard.png"] style:UIBarButtonItemStylePlain target:self action:@selector(dismissKeyboard)];
+        self.keyboardItem = [[UIBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSkeyboard.png"] style:UIBarButtonItemStylePlain target:self action:@selector(dismissKeyboard)];
         keyboardToolbar.items = @[self.keyboardItem];
         [self.toolbarHolder addSubview:toolbarCropper];
         
@@ -185,10 +185,10 @@ static Class hackishFixClass = Nil;
     [self buildToolbar];
     
     if (!self.resourcesLoaded) {
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"editor" ofType:@"html"];
+        NSString *filePath = [[ZSSRichTextEditorResource bundle] pathForResource:@"editor" ofType:@"html"];
         NSData *htmlData = [NSData dataWithContentsOfFile:filePath];
         NSString *htmlString = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
-        NSString *source = [[NSBundle mainBundle] pathForResource:@"ZSSRichTextEditor" ofType:@"js"];
+        NSString *source = [[ZSSRichTextEditorResource bundle] pathForResource:@"ZSSRichTextEditor" ofType:@"js"];
         NSString *jsString = [[NSString alloc] initWithData:[NSData dataWithContentsOfFile:source] encoding:NSUTF8StringEncoding];
         htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<!--editor-->" withString:jsString];
         
@@ -259,224 +259,224 @@ static Class hackishFixClass = Nil;
     
     // Bold
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarBold]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *bold = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSbold.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setBold)];
+        ZSSBarButtonItem *bold = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSbold.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setBold)];
         bold.label = @"bold";
         [items addObject:bold];
     }
     
     // Italic
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarItalic]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *italic = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSitalic.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setItalic)];
+        ZSSBarButtonItem *italic = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSitalic.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setItalic)];
         italic.label = @"italic";
         [items addObject:italic];
     }
     
     // Subscript
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarSubscript]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *subscript = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSsubscript.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setSubscript)];
+        ZSSBarButtonItem *subscript = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSsubscript.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setSubscript)];
         subscript.label = @"subscript";
         [items addObject:subscript];
     }
     
     // Superscript
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarSuperscript]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *superscript = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSsuperscript.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setSuperscript)];
+        ZSSBarButtonItem *superscript = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSsuperscript.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setSuperscript)];
         superscript.label = @"superscript";
         [items addObject:superscript];
     }
     
     // Strike Through
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarStrikeThrough]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *strikeThrough = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSstrikethrough.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setStrikethrough)];
+        ZSSBarButtonItem *strikeThrough = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSstrikethrough.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setStrikethrough)];
         strikeThrough.label = @"strikeThrough";
         [items addObject:strikeThrough];
     }
     
     // Underline
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarUnderline]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *underline = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSunderline.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setUnderline)];
+        ZSSBarButtonItem *underline = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSunderline.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setUnderline)];
         underline.label = @"underline";
         [items addObject:underline];
     }
     
     // Remove Format
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarRemoveFormat]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *removeFormat = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSclearstyle.png"] style:UIBarButtonItemStylePlain target:self action:@selector(removeFormat)];
+        ZSSBarButtonItem *removeFormat = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSclearstyle.png"] style:UIBarButtonItemStylePlain target:self action:@selector(removeFormat)];
         removeFormat.label = @"removeFormat";
         [items addObject:removeFormat];
     }
     
     // Undo
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarUndo]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *undoButton = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSundo.png"] style:UIBarButtonItemStylePlain target:self action:@selector(undo:)];
+        ZSSBarButtonItem *undoButton = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSundo.png"] style:UIBarButtonItemStylePlain target:self action:@selector(undo:)];
         undoButton.label = @"undo";
         [items addObject:undoButton];
     }
     
     // Redo
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarRedo]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *redoButton = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSredo.png"] style:UIBarButtonItemStylePlain target:self action:@selector(redo:)];
+        ZSSBarButtonItem *redoButton = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSredo.png"] style:UIBarButtonItemStylePlain target:self action:@selector(redo:)];
         redoButton.label = @"redo";
         [items addObject:redoButton];
     }
     
     // Align Left
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarJustifyLeft]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *alignLeft = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSleftjustify.png"] style:UIBarButtonItemStylePlain target:self action:@selector(alignLeft)];
+        ZSSBarButtonItem *alignLeft = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSleftjustify.png"] style:UIBarButtonItemStylePlain target:self action:@selector(alignLeft)];
         alignLeft.label = @"justifyLeft";
         [items addObject:alignLeft];
     }
     
     // Align Center
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarJustifyCenter]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *alignCenter = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSScenterjustify.png"] style:UIBarButtonItemStylePlain target:self action:@selector(alignCenter)];
+        ZSSBarButtonItem *alignCenter = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSScenterjustify.png"] style:UIBarButtonItemStylePlain target:self action:@selector(alignCenter)];
         alignCenter.label = @"justifyCenter";
         [items addObject:alignCenter];
     }
     
     // Align Right
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarJustifyRight]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *alignRight = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSrightjustify.png"] style:UIBarButtonItemStylePlain target:self action:@selector(alignRight)];
+        ZSSBarButtonItem *alignRight = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSrightjustify.png"] style:UIBarButtonItemStylePlain target:self action:@selector(alignRight)];
         alignRight.label = @"justifyRight";
         [items addObject:alignRight];
     }
     
     // Align Justify
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarJustifyFull]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *alignFull = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSforcejustify.png"] style:UIBarButtonItemStylePlain target:self action:@selector(alignFull)];
+        ZSSBarButtonItem *alignFull = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSforcejustify.png"] style:UIBarButtonItemStylePlain target:self action:@selector(alignFull)];
         alignFull.label = @"justifyFull";
         [items addObject:alignFull];
     }
     
     // Paragraph
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarParagraph]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *paragraph = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSparagraph.png"] style:UIBarButtonItemStylePlain target:self action:@selector(paragraph)];
+        ZSSBarButtonItem *paragraph = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSparagraph.png"] style:UIBarButtonItemStylePlain target:self action:@selector(paragraph)];
         paragraph.label = @"p";
         [items addObject:paragraph];
     }
     
     // Header 1
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarH1]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *h1 = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSh1.png"] style:UIBarButtonItemStylePlain target:self action:@selector(heading1)];
+        ZSSBarButtonItem *h1 = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSh1.png"] style:UIBarButtonItemStylePlain target:self action:@selector(heading1)];
         h1.label = @"h1";
         [items addObject:h1];
     }
     
     // Header 2
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarH2]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *h2 = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSh2.png"] style:UIBarButtonItemStylePlain target:self action:@selector(heading2)];
+        ZSSBarButtonItem *h2 = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSh2.png"] style:UIBarButtonItemStylePlain target:self action:@selector(heading2)];
         h2.label = @"h2";
         [items addObject:h2];
     }
     
     // Header 3
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarH3]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *h3 = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSh3.png"] style:UIBarButtonItemStylePlain target:self action:@selector(heading3)];
+        ZSSBarButtonItem *h3 = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSh3.png"] style:UIBarButtonItemStylePlain target:self action:@selector(heading3)];
         h3.label = @"h3";
         [items addObject:h3];
     }
     
     // Heading 4
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarH4]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *h4 = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSh4.png"] style:UIBarButtonItemStylePlain target:self action:@selector(heading4)];
+        ZSSBarButtonItem *h4 = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSh4.png"] style:UIBarButtonItemStylePlain target:self action:@selector(heading4)];
         h4.label = @"h4";
         [items addObject:h4];
     }
     
     // Header 5
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarH5]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *h5 = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSh5.png"] style:UIBarButtonItemStylePlain target:self action:@selector(heading5)];
+        ZSSBarButtonItem *h5 = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSh5.png"] style:UIBarButtonItemStylePlain target:self action:@selector(heading5)];
         h5.label = @"h5";
         [items addObject:h5];
     }
     
     // Heading 6
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarH6]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *h6 = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSh6.png"] style:UIBarButtonItemStylePlain target:self action:@selector(heading6)];
+        ZSSBarButtonItem *h6 = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSh6.png"] style:UIBarButtonItemStylePlain target:self action:@selector(heading6)];
         h6.label = @"h6";
         [items addObject:h6];
     }
     
     // Text Color
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarTextColor]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *textColor = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSStextcolor.png"] style:UIBarButtonItemStylePlain target:self action:@selector(textColor)];
+        ZSSBarButtonItem *textColor = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSStextcolor.png"] style:UIBarButtonItemStylePlain target:self action:@selector(textColor)];
         textColor.label = @"textColor";
         [items addObject:textColor];
     }
     
     // Background Color
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarBackgroundColor]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *bgColor = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSbgcolor.png"] style:UIBarButtonItemStylePlain target:self action:@selector(bgColor)];
+        ZSSBarButtonItem *bgColor = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSbgcolor.png"] style:UIBarButtonItemStylePlain target:self action:@selector(bgColor)];
         bgColor.label = @"backgroundColor";
         [items addObject:bgColor];
     }
     
     // Unordered List
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarUnorderedList]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *ul = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSunorderedlist.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setUnorderedList)];
+        ZSSBarButtonItem *ul = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSunorderedlist.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setUnorderedList)];
         ul.label = @"unorderedList";
         [items addObject:ul];
     }
     
     // Ordered List
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarOrderedList]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *ol = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSorderedlist.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setOrderedList)];
+        ZSSBarButtonItem *ol = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSorderedlist.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setOrderedList)];
         ol.label = @"orderedList";
         [items addObject:ol];
     }
     
     // Horizontal Rule
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarHorizontalRule]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *hr = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSShorizontalrule.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setHR)];
+        ZSSBarButtonItem *hr = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSShorizontalrule.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setHR)];
         hr.label = @"horizontalRule";
         [items addObject:hr];
     }
     
     // Indent
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarIndent]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *indent = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSindent.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setIndent)];
+        ZSSBarButtonItem *indent = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSindent.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setIndent)];
         indent.label = @"indent";
         [items addObject:indent];
     }
     
     // Outdent
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarOutdent]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *outdent = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSoutdent.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setOutdent)];
+        ZSSBarButtonItem *outdent = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSoutdent.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setOutdent)];
         outdent.label = @"outdent";
         [items addObject:outdent];
     }
     
     // Image
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarInsertImage]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *insertImage = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSimage.png"] style:UIBarButtonItemStylePlain target:self action:@selector(insertImage)];
+        ZSSBarButtonItem *insertImage = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSimage.png"] style:UIBarButtonItemStylePlain target:self action:@selector(insertImage)];
         insertImage.label = @"image";
         [items addObject:insertImage];
     }
     
     // Insert Link
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarInsertLink]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *insertLink = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSlink.png"] style:UIBarButtonItemStylePlain target:self action:@selector(insertLink)];
+        ZSSBarButtonItem *insertLink = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSlink.png"] style:UIBarButtonItemStylePlain target:self action:@selector(insertLink)];
         insertLink.label = @"link";
         [items addObject:insertLink];
     }
     
     // Remove Link
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarRemoveLink]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *removeLink = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSunlink.png"] style:UIBarButtonItemStylePlain target:self action:@selector(removeLink)];
+        ZSSBarButtonItem *removeLink = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSunlink.png"] style:UIBarButtonItemStylePlain target:self action:@selector(removeLink)];
         removeLink.label = @"removeLink";
         [items addObject:removeLink];
     }
     
     // Quick Link
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarQuickLink]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *quickLink = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSquicklink.png"] style:UIBarButtonItemStylePlain target:self action:@selector(quickLink)];
+        ZSSBarButtonItem *quickLink = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSquicklink.png"] style:UIBarButtonItemStylePlain target:self action:@selector(quickLink)];
         quickLink.label = @"quickLink";
         [items addObject:quickLink];
     }
     
     // Show Source
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarViewSource]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *showSource = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSviewsource.png"] style:UIBarButtonItemStylePlain target:self action:@selector(showHTMLSource:)];
+        ZSSBarButtonItem *showSource = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSviewsource.png"] style:UIBarButtonItemStylePlain target:self action:@selector(showHTMLSource:)];
         showSource.label = @"source";
         [items addObject:showSource];
     }
@@ -737,7 +737,7 @@ static Class hackishFixClass = Nil;
     HRColorPickerViewController *colorPicker = [HRColorPickerViewController cancelableFullColorPickerViewControllerWithColor:[UIColor whiteColor]];
     colorPicker.delegate = self;
     colorPicker.tag = 1;
-    colorPicker.title = NSLocalizedString(@"Text Color", nil);
+    colorPicker.title = ZSSRichTextEditorLocalizedString(@"Text Color", nil);
     [self.navigationController pushViewController:colorPicker animated:YES];
     
 }
@@ -751,7 +751,7 @@ static Class hackishFixClass = Nil;
     HRColorPickerViewController *colorPicker = [HRColorPickerViewController cancelableFullColorPickerViewControllerWithColor:[UIColor whiteColor]];
     colorPicker.delegate = self;
     colorPicker.tag = 2;
-    colorPicker.title = NSLocalizedString(@"BG Color", nil);
+    colorPicker.title = ZSSRichTextEditorLocalizedString(@"BG Color", nil);
     [self.navigationController pushViewController:colorPicker animated:YES];
     
 }
@@ -791,19 +791,19 @@ static Class hackishFixClass = Nil;
 - (void)showInsertLinkDialogWithLink:(NSString *)url title:(NSString *)title {
     
     // Insert Button Title
-    NSString *insertButtonTitle = !self.selectedLinkURL ? NSLocalizedString(@"Insert", nil) : NSLocalizedString(@"Update", nil);
+    NSString *insertButtonTitle = !self.selectedLinkURL ? ZSSRichTextEditorLocalizedString(@"Insert", nil) : ZSSRichTextEditorLocalizedString(@"Update", nil);
     
     // Picker Button
     UIButton *am = [UIButton buttonWithType:UIButtonTypeCustom];
     am.frame = CGRectMake(0, 0, 25, 25);
-    [am setImage:[UIImage imageNamed:@"ZSSpicker.png"] forState:UIControlStateNormal];
+    [am setImage:[ZSSRichTextEditorResource imageNamed:@"ZSSpicker.png"] forState:UIControlStateNormal];
     [am addTarget:self action:@selector(showInsertURLAlternatePicker) forControlEvents:UIControlEventTouchUpInside];
     
     if ([NSProcessInfo instancesRespondToSelector:@selector(isOperatingSystemAtLeastVersion:)]) {
         
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Insert Link", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:ZSSRichTextEditorLocalizedString(@"Insert Link", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-            textField.placeholder = NSLocalizedString(@"URL (required)", nil);
+            textField.placeholder = ZSSRichTextEditorLocalizedString(@"URL (required)", nil);
             if (url) {
                 textField.text = url;
             }
@@ -812,14 +812,14 @@ static Class hackishFixClass = Nil;
             textField.clearButtonMode = UITextFieldViewModeAlways;
         }];
         [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-            textField.placeholder = NSLocalizedString(@"Title", nil);
+            textField.placeholder = ZSSRichTextEditorLocalizedString(@"Title", nil);
             textField.clearButtonMode = UITextFieldViewModeAlways;
             textField.secureTextEntry = NO;
             if (title) {
                 textField.text = title;
             }
         }];
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        [alertController addAction:[UIAlertAction actionWithTitle:ZSSRichTextEditorLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
             [self focusTextEditor];
         }]];
         [alertController addAction:[UIAlertAction actionWithTitle:insertButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -838,11 +838,11 @@ static Class hackishFixClass = Nil;
         
     } else {
         
-        self.alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Insert Link", nil) message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:insertButtonTitle, nil];
+        self.alertView = [[UIAlertView alloc] initWithTitle:ZSSRichTextEditorLocalizedString(@"Insert Link", nil) message:nil delegate:self cancelButtonTitle:ZSSRichTextEditorLocalizedString(@"Cancel", nil) otherButtonTitles:insertButtonTitle, nil];
         self.alertView.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
         self.alertView.tag = 2;
         UITextField *linkURL = [self.alertView textFieldAtIndex:0];
-        linkURL.placeholder = NSLocalizedString(@"URL (required)", nil);
+        linkURL.placeholder = ZSSRichTextEditorLocalizedString(@"URL (required)", nil);
         if (url) {
             linkURL.text = url;
         }
@@ -852,7 +852,7 @@ static Class hackishFixClass = Nil;
         
         UITextField *alt = [self.alertView textFieldAtIndex:1];
         alt.secureTextEntry = NO;
-        alt.placeholder = NSLocalizedString(@"Title", nil);
+        alt.placeholder = ZSSRichTextEditorLocalizedString(@"Title", nil);
         if (title) {
             alt.text = title;
         }
@@ -931,19 +931,19 @@ static Class hackishFixClass = Nil;
 - (void)showInsertImageDialogWithLink:(NSString *)url alt:(NSString *)alt {
     
     // Insert Button Title
-    NSString *insertButtonTitle = !self.selectedImageURL ? NSLocalizedString(@"Insert", nil) : NSLocalizedString(@"Update", nil);
+    NSString *insertButtonTitle = !self.selectedImageURL ? ZSSRichTextEditorLocalizedString(@"Insert", nil) : ZSSRichTextEditorLocalizedString(@"Update", nil);
     
     // Picker Button
     UIButton *am = [UIButton buttonWithType:UIButtonTypeCustom];
     am.frame = CGRectMake(0, 0, 25, 25);
-    [am setImage:[UIImage imageNamed:@"ZSSpicker.png"] forState:UIControlStateNormal];
+    [am setImage:[ZSSRichTextEditorResource imageNamed:@"ZSSpicker.png"] forState:UIControlStateNormal];
     [am addTarget:self action:@selector(showInsertImageAlternatePicker) forControlEvents:UIControlEventTouchUpInside];
     
     if ([NSProcessInfo instancesRespondToSelector:@selector(isOperatingSystemAtLeastVersion:)]) {
         
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Insert Image", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:ZSSRichTextEditorLocalizedString(@"Insert Image", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-            textField.placeholder = NSLocalizedString(@"URL (required)", nil);
+            textField.placeholder = ZSSRichTextEditorLocalizedString(@"URL (required)", nil);
             if (url) {
                 textField.text = url;
             }
@@ -952,14 +952,14 @@ static Class hackishFixClass = Nil;
             textField.clearButtonMode = UITextFieldViewModeAlways;
         }];
         [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-            textField.placeholder = NSLocalizedString(@"Alt", nil);
+            textField.placeholder = ZSSRichTextEditorLocalizedString(@"Alt", nil);
             textField.clearButtonMode = UITextFieldViewModeAlways;
             textField.secureTextEntry = NO;
             if (alt) {
                 textField.text = alt;
             }
         }];
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        [alertController addAction:[UIAlertAction actionWithTitle:ZSSRichTextEditorLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
             [self focusTextEditor];
         }]];
         [alertController addAction:[UIAlertAction actionWithTitle:insertButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -977,11 +977,11 @@ static Class hackishFixClass = Nil;
         
     } else {
         
-        self.alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Insert Image", nil) message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:insertButtonTitle, nil];
+        self.alertView = [[UIAlertView alloc] initWithTitle:ZSSRichTextEditorLocalizedString(@"Insert Image", nil) message:nil delegate:self cancelButtonTitle:ZSSRichTextEditorLocalizedString(@"Cancel", nil) otherButtonTitles:insertButtonTitle, nil];
         self.alertView.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
         self.alertView.tag = 1;
         UITextField *imageURL = [self.alertView textFieldAtIndex:0];
-        imageURL.placeholder = NSLocalizedString(@"URL (required)", nil);
+        imageURL.placeholder = ZSSRichTextEditorLocalizedString(@"URL (required)", nil);
         if (url) {
             imageURL.text = url;
         }
@@ -992,7 +992,7 @@ static Class hackishFixClass = Nil;
         
         UITextField *alt1 = [self.alertView textFieldAtIndex:1];
         alt1.secureTextEntry = NO;
-        alt1.placeholder = NSLocalizedString(@"Alt", nil);
+        alt1.placeholder = ZSSRichTextEditorLocalizedString(@"Alt", nil);
         alt1.clearButtonMode = UITextFieldViewModeAlways;
         if (alt) {
             alt1.text = alt;

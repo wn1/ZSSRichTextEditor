@@ -8,6 +8,7 @@
 
 #import "ZSSCustomButtonsViewController.h"
 #import "ZSSBarButtonItem.h"
+#import "ZSSRichTextEditorResource.h"
 
 @interface ZSSCustomButtonsViewController ()
 
@@ -41,7 +42,7 @@
     [self addCustomToolbarItemWithButton:myButton];
     
     // Custom image button
-    ZSSBarButtonItem *item = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSinsertkeyword.png"] style:UIBarButtonItemStylePlain target:self action:@selector(didTapCustomToolbarButton:)];
+    ZSSBarButtonItem *item = [[ZSSBarButtonItem alloc] initWithImage:[ZSSRichTextEditorResource imageNamed:@"ZSSinsertkeyword.png"] style:UIBarButtonItemStylePlain target:self action:@selector(didTapCustomToolbarButton:)];
     [self addCustomToolbarItem:item];
     
 }
@@ -52,7 +53,7 @@
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Custom Button!"
                                                         message:nil
                                                        delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                              cancelButtonTitle:ZSSRichTextEditorLocalizedString(@"Cancel", nil)
                                               otherButtonTitles:nil];
     [alertView show];
     
